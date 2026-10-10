@@ -12,7 +12,7 @@ export WATCHDOG_FAKE_LOG="${work_dir}/launches.log"
 export WATCHDOG_MAX_CHECKS=2
 
 "${test_dir}/../watchdog.sh" \
-    192.168.50.62 \
+    192.0.2.10 \
     5555 \
     com.laemcasa.remote_ha_wall \
     .MainActivity \
@@ -30,7 +30,7 @@ echo "watchdog recovery test passed"
 : >"${WATCHDOG_FAKE_LOG}"
 export WATCHDOG_FAKE_FOREGROUND="com.android.settings/.Settings"
 "${test_dir}/../watchdog.sh" \
-    192.168.50.62 \
+    192.0.2.10 \
     5555 \
     com.laemcasa.remote_ha_wall \
     .MainActivity \
@@ -44,7 +44,7 @@ echo "settings foreground safety test passed"
 : >"${WATCHDOG_FAKE_LOG}"
 export WATCHDOG_FAKE_FOREGROUND=""
 "${test_dir}/../watchdog.sh" \
-    192.168.50.62 \
+    192.0.2.10 \
     5555 \
     com.laemcasa.remote_ha_wall \
     .MainActivity \

@@ -10,6 +10,11 @@ startup_grace="$(bashio::config panel_startup_grace_seconds)"
 failed_checks="$(bashio::config failed_checks_before_launch)"
 launch_cooldown="$(bashio::config launch_cooldown_seconds)"
 
+if [[ -z "${panel_host}" || "${panel_host}" == "null" ]]; then
+    bashio::log.fatal "Set the panel host to the panel's local IP address or hostname before starting the app."
+    exit 64
+fi
+
 bashio::log.info "Monitoring ${package_name} on ${panel_host}:${panel_port}."
 
 exec /watchdog.sh \

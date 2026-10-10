@@ -21,10 +21,13 @@ are left alone.
 Recovery attempts are rate-limited. Logs are available from the app's Home
 Assistant page.
 
-## Default configuration
+## Configuration
+
+`panel_host` is blank until you enter the panel's local IP address or hostname.
+The app cannot start without it. The address below is an example only.
 
 ```yaml
-panel_host: 192.168.50.62
+panel_host: 192.168.1.50
 panel_port: 5555
 package_name: com.laemcasa.remote_ha_wall
 activity_name: .MainActivity
