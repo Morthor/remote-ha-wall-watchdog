@@ -26,3 +26,31 @@ grep -q \
     "${WATCHDOG_FAKE_LOG}"
 
 echo "watchdog recovery test passed"
+
+: >"${WATCHDOG_FAKE_LOG}"
+export WATCHDOG_FAKE_FOREGROUND="com.android.settings/.Settings"
+"${test_dir}/../watchdog.sh" \
+    192.168.50.62 \
+    5555 \
+    com.laemcasa.remote_ha_wall \
+    .MainActivity \
+    0 \
+    120 \
+    2 \
+    0
+test ! -s "${WATCHDOG_FAKE_LOG}"
+echo "settings foreground safety test passed"
+
+: >"${WATCHDOG_FAKE_LOG}"
+export WATCHDOG_FAKE_FOREGROUND=""
+"${test_dir}/../watchdog.sh" \
+    192.168.50.62 \
+    5555 \
+    com.laemcasa.remote_ha_wall \
+    .MainActivity \
+    0 \
+    120 \
+    2 \
+    0
+test ! -s "${WATCHDOG_FAKE_LOG}"
+echo "unknown foreground safety test passed"

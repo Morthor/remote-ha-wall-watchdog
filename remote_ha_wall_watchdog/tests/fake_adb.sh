@@ -12,7 +12,10 @@ case "${args}" in
     *"shell pidof"*) ;;
     *"shell cat /proc/uptime"*) echo "600.00 100.00" ;;
     *"shell dumpsys activity activities"*)
-        echo "mResumedActivity: ActivityRecord{abc u0 cloud.shelly.stargate/.activities.MainActivity t1}"
+        foreground="${WATCHDOG_FAKE_FOREGROUND-cloud.shelly.stargate/.activities.MainActivity}"
+        if [[ -n "${foreground}" ]]; then
+            echo "mResumedActivity: ActivityRecord{abc u0 ${foreground} t1}"
+        fi
         ;;
     *"shell dumpsys package"*)
         echo "User 0: installed=true hidden=false stopped=true enabled=0"

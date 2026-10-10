@@ -57,7 +57,7 @@ foreground_component() {
 
 foreground_allows_recovery() {
     case "$1" in
-        cloud.shelly.stargate/* | cloud.shelly.placeholder/* | "") return 0 ;;
+        cloud.shelly.stargate/* | cloud.shelly.placeholder/*) return 0 ;;
         *) return 1 ;;
     esac
 }
