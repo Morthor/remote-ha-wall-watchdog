@@ -1,0 +1,29 @@
+name: Remote HA Wall Watchdog
+version: 0.1.0
+slug: remote_ha_wall_watchdog
+description: Restarts the Remote HA Wall dashboard after Shelly force-stops it.
+url: https://github.com/morthor/remote-ha-wall-watchdog
+arch:
+  - aarch64
+startup: application
+boot: auto
+init: false
+stage: experimental
+options:
+  panel_host: 192.168.50.62
+  panel_port: 5555
+  package_name: com.laemcasa.remote_ha_wall
+  activity_name: .MainActivity
+  check_interval_seconds: 30
+  panel_startup_grace_seconds: 120
+  failed_checks_before_launch: 2
+  launch_cooldown_seconds: 300
+schema:
+  panel_host: str
+  panel_port: port
+  package_name: str
+  activity_name: str
+  check_interval_seconds: int(10,300)
+  panel_startup_grace_seconds: int(60,600)
+  failed_checks_before_launch: int(1,10)
+  launch_cooldown_seconds: int(60,3600)
