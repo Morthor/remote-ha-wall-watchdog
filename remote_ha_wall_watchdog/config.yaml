@@ -1,5 +1,5 @@
 name: Remote HA Wall Watchdog
-version: 0.1.0
+version: 0.1.1
 slug: remote_ha_wall_watchdog
 description: Restarts the Remote HA Wall dashboard after Shelly force-stops it.
 url: https://github.com/morthor/remote-ha-wall-watchdog

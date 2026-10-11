@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Initialize Shelly's native navigation overlay before watchdog recovery starts
+  the wall dashboard.
+
 ## 0.1.0
 
 - Initial Home Assistant Green watchdog.

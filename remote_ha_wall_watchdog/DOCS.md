@@ -16,7 +16,8 @@ The watchdog never force-stops applications and never installs APKs. It waits
 for the panel's boot grace period, confirms that the dashboard process is
 missing for multiple checks, and launches it only while the Shelly launcher or
 placeholder is in the foreground. Android Settings and other foreground apps
-are left alone.
+are left alone. Recovery briefly opens Shelly's native launcher before the
+dashboard so the panel's Home and Back controls remain available.
 
 Recovery attempts are rate-limited. Logs are available from the app's Home
 Assistant page.

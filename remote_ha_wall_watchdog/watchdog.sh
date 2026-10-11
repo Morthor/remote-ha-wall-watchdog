@@ -20,6 +20,8 @@ data_dir="${WATCHDOG_DATA_DIR:-/data}"
 max_checks="${WATCHDOG_MAX_CHECKS:-0}"
 serial="${panel_host}:${panel_port}"
 component="${package_name}/${activity_name}"
+shelly_component="cloud.shelly.stargate/.activities.SplashActivity"
+shelly_handoff_delay="${WATCHDOG_SHELLY_HANDOFF_DELAY_SECONDS:-6}"
 adb_key="${data_dir}/adbkey"
 
 mkdir -p "${data_dir}"
@@ -69,6 +71,17 @@ package_stopped_state() {
         tr -d '\r'
 }
 
+prepare_shelly_navigation() {
+    log "Preparing Shelly navigation before launching ${component}."
+    if adb_device shell am start -W -n "${shelly_component}" >/dev/null 2>&1; then
+        if ((shelly_handoff_delay > 0)); then
+            sleep "${shelly_handoff_delay}"
+        fi
+    else
+        log "Shelly navigation handoff failed; attempting dashboard launch anyway."
+    fi
+}
+
 panel_uptime_seconds() {
     adb_device shell cat /proc/uptime 2>/dev/null |
         awk '{print int($1)}' |
@@ -116,6 +129,7 @@ while true; do
                 if ((failed_checks >= failed_checks_before_launch)) &&
                     ((since_last_launch >= launch_cooldown)); then
                     log "Launching ${component}; ${state}."
+                    prepare_shelly_navigation
                     if adb_device shell am start -W -n "${component}" >/dev/null 2>&1; then
                         last_launch_epoch="${now_epoch}"
                         failed_checks=0
